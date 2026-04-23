@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launching Soon | Future Project</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen flex items-center justify-center p-6">
+
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10">
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse delay-1000"></div>
+    </div>
+
+    <main class="glass p-8 md:p-12 rounded-3xl max-w-2xl w-full text-center shadow-2xl">
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+            Something Epic is Loading
+        </h1>
+        <p class="text-gray-400 mb-10 text-lg">We are crafting the future. Join the waitlist to be the first to know when we go live.</p>
+
+        <div id="countdown" class="grid grid-cols-4 gap-4 mb-10">
+            <div class="glass p-4 rounded-xl"><span id="days" class="block text-2xl font-bold">00</span><span class="text-xs text-gray-500">DAYS</span></div>
+            <div class="glass p-4 rounded-xl"><span id="hours" class="block text-2xl font-bold">00</span><span class="text-xs text-gray-500">HOURS</span></div>
+            <div class="glass p-4 rounded-xl"><span id="minutes" class="block text-2xl font-bold">00</span><span class="text-xs text-gray-500">MINS</span></div>
+            <div class="glass p-4 rounded-xl"><span id="seconds" class="block text-2xl font-bold">00</span><span class="text-xs text-gray-500">SECS</span></div>
+        </div>
+
+        <form class="flex flex-col md:flex-row gap-3">
+            <input type="email" placeholder="Enter your email" class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all">
+            <button class="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-3 rounded-xl font-semibold hover:opacity-90 transition-opacity">
+                Get Notified
+            </button>
+        </form>
+    </main>
+
+    <script>
+        // Set your launch date here (e.g., 30 days from now)
+        const launchDate = new Date().getTime() + (30 * 24 * 60 * 60 * 1000);
+
+        function updateTimer() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            document.getElementById('days').innerText = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
