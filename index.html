@@ -847,13 +847,17 @@ function startFeed() {
   let muted = false;
   try { muted = localStorage.getItem(KEY) === '1'; } catch {}
   if (!muted) {
-    const kickoff = () => {
-      if (started) return;
-      started = true;
-      play();
-      ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(ev => window.removeEventListener(ev, kickoff));
+    const kickoff = (e) => {
+      if (started || btn.contains(e.target)) return; /* toggle clicks handle themselves */
+      audio.volume = 0;
+      audio.play().then(() => {
+        started = true;
+        setIcons(true);
+        fadeTo(TARGET_VOL, 2000);
+        ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.removeEventListener(ev, kickoff));
+      }).catch(() => {}); /* gesture didn't qualify — keep listening for the next one */
     };
-    ['pointerdown', 'keydown', 'touchstart', 'wheel'].forEach(ev => window.addEventListener(ev, kickoff, { passive: true }));
+    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, kickoff, { passive: true }));
   }
 })();
 
