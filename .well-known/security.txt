@@ -1,0 +1,9 @@
+# Security policy for aarondavidge.com and all subdomains
+# Active vulnerability scanning, exploitation, and security research
+# against these systems is NOT authorized. See policy for details.
+
+Contact: mailto:bugs@aarondavidge.com
+Policy: https://aarondavidge.com/security.html
+Canonical: https://aarondavidge.com/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-07-12T00:00:00.000Z
