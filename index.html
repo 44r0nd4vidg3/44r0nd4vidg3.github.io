@@ -847,17 +847,19 @@ function startFeed() {
   let muted = false;
   try { muted = localStorage.getItem(KEY) === '1'; } catch {}
   if (!muted) {
+    const KICKOFF_EVENTS = ['pointerdown', 'keydown', 'touchstart', 'click', 'wheel', 'scroll'];
     const kickoff = (e) => {
-      if (started || btn.contains(e.target)) return; /* toggle clicks handle themselves */
+      if (started || (e && e.target && btn.contains(e.target))) return; /* toggle clicks handle themselves */
       audio.volume = 0;
       audio.play().then(() => {
         started = true;
         setIcons(true);
         fadeTo(TARGET_VOL, 2000);
-        ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.removeEventListener(ev, kickoff));
-      }).catch(() => {}); /* gesture didn't qualify — keep listening for the next one */
+        KICKOFF_EVENTS.forEach(ev => window.removeEventListener(ev, kickoff));
+      }).catch(() => {}); /* not permitted yet — keep listening */
     };
-    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => window.addEventListener(ev, kickoff, { passive: true }));
+    KICKOFF_EVENTS.forEach(ev => window.addEventListener(ev, kickoff, { passive: true }));
+    kickoff(null); /* eager attempt on load — works for returning visitors browsers already trust */
   }
 })();
 
