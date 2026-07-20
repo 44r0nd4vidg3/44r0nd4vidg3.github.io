@@ -167,6 +167,7 @@
   #gh-grid .gh-cell { aspect-ratio: 1 / 1; width: 100%; }
   .gh-scroll { overflow-x: auto; scrollbar-width: none; }
   .gh-scroll::-webkit-scrollbar { display: none; }
+  .gh-legend { gap: 4px; }
   .gh-legend .gh-cell { width: 9px; height: 9px; display: inline-block; }
 
   /* debugger stepping through the source card, line by line */
@@ -473,7 +474,7 @@ if (META_PIXEL_ID) {
         </div>
         <div class="flex justify-between items-center mt-4 pt-3 border-t border-[#12233f] text-[10px] tracking-[0.15em] text-slate-600">
           <span id="gh-total" class="text-slate-400">SYNCING…</span>
-          <span class="gh-legend flex items-center gap-1">LESS <span class="gh-cell"></span><span class="gh-cell gh-l1"></span><span class="gh-cell gh-l2"></span><span class="gh-cell gh-l3"></span><span class="gh-cell gh-l4"></span> MORE</span>
+          <span class="gh-legend flex items-center">LESS <span class="gh-cell"></span><span class="gh-cell gh-l1"></span><span class="gh-cell gh-l2"></span><span class="gh-cell gh-l3"></span><span class="gh-cell gh-l4"></span> MORE</span>
         </div>
       </div>
 
@@ -502,6 +503,7 @@ if (META_PIXEL_ID) {
           <div class="flex justify-between gap-4 border-b border-[#12233f] pb-3"><dt class="text-slate-500 tracking-[0.2em]">NAME</dt><dd class="text-slate-200 text-right">Aaron Davidge <span class="text-slate-500">// 44r0n D4vidg3</span></dd></div>
           <div class="flex justify-between gap-4 border-b border-[#12233f] pb-3"><dt class="text-slate-500 tracking-[0.2em]">ROLE</dt><dd class="text-slate-200 text-right">AI Engineer &amp; Security Researcher</dd></div>
           <div class="flex justify-between gap-4 border-b border-[#12233f] pb-3"><dt class="text-slate-500 tracking-[0.2em]">DEGREE</dt><dd class="text-right"><span class="text-slate-200 block">B.S. Computer Science</span><span class="text-slate-500 text-[11px] block">Math &amp; Security concentration</span></dd></div>
+          <div class="flex justify-between gap-4 border-b border-[#12233f] pb-3"><dt class="text-slate-500 tracking-[0.2em]">CERTS</dt><dd class="text-right"><span class="text-slate-200 block">AWS Cloud Practitioner</span><span class="text-amber-400 text-[11px] block">OSCP · LOADING<span class="cursor-blink inline-block align-middle" style="width:6px;height:12px;margin-left:5px;background:#fbbf24;box-shadow:0 0 6px rgba(251,191,36,.7)"></span></span></dd></div>
           <div class="flex justify-between gap-4 border-b border-[#12233f] pb-3"><dt class="text-slate-500 tracking-[0.2em]">EMAIL</dt><dd class="text-right"><a href="mailto:aaron@aarondavidge.com" class="text-blue-400 hover:text-blue-300">aaron@aarondavidge.com</a></dd></div>
           <div class="flex justify-between gap-4 border-b border-[#12233f] pb-3"><dt class="text-slate-500 tracking-[0.2em]">PHONE</dt><dd class="text-right"><a href="tel:+15044703770" class="text-blue-400 hover:text-blue-300">(504) 470-3770</a></dd></div>
           <div class="flex justify-between gap-4"><dt class="text-slate-500 tracking-[0.2em]">STATUS</dt><dd class="text-right text-emerald-400 flex items-center gap-2 justify-end"><span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399] animate-pulse"></span>OPEN TO WORK</dd></div>
