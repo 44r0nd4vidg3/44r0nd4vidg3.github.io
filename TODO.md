@@ -32,5 +32,5 @@ Imported from Google Tasks, 2026-07-16.
 
 - [ ] Assistant — https://assistant.aarondavidge.com
 - [ ] Store — https://store.aarondavidge.com
-- [ ] Static blog — https://blog.aarondavidge.com
+- [x] Static blog — phase 1 live at https://aarondavidge.com/blog/ (SSG -> dynamic -> admin panel later)
 - [ ] Admin panel — https://admin.aarondavidge.com

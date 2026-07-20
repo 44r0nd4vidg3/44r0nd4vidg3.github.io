@@ -23,7 +23,7 @@ Production-ready static site. No build step required at deploy time (CSS is pre-
 - `sitemap.xml`
 - `.well-known/security.txt` — RFC 9116 (hidden folder — make sure it uploads)
 
-> `hero.png` and `card_image.png` are original source images and are **not referenced** — omit them.
+> `hero.png` and `card_image.png` (original source images, never referenced) have been removed from the project.
 
 ## Host-specific notes
 
