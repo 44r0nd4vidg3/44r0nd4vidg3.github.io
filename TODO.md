@@ -13,7 +13,7 @@ Imported from Google Tasks, 2026-07-16.
 - [x] Add favicon icon
 - [x] Add GitHub activity bar component to UI
 - [x] Add halo theme audio to auto play
-- [ ] Add Google & Facebook tracking pixel (Google ✅ live · Meta installed, awaiting dataset ID)
+- [x] Add Google & Facebook tracking pixel — both verified live in production
 - [ ] Updated resume/CV PDF
 - [ ] Consider removing security focus
 
@@ -31,6 +31,6 @@ Imported from Google Tasks, 2026-07-16.
 ## New Subdomains / Projects
 
 - [ ] Assistant — https://assistant.aarondavidge.com
-- [ ] Store — https://store.aarondavidge.com
+- [x] Store — phase 1 live at https://store.aarondavidge.com (static catalog · Stripe checkout = phase 2)
 - [x] Static blog — phase 1 live at https://aarondavidge.com/blog/ (SSG -> dynamic -> admin panel later)
 - [ ] Admin panel — https://admin.aarondavidge.com
