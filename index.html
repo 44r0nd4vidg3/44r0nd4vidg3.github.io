@@ -206,6 +206,24 @@
       linear-gradient(90deg, rgba(4,7,14,.6) 0%, rgba(4,7,14,.35) 28%, rgba(4,7,14,.05) 52%, rgba(4,7,14,.05) 72%, rgba(4,7,14,.3) 100%),
       linear-gradient(180deg, rgba(4,7,14,.4) 0%, rgba(4,7,14,.05) 22%, rgba(4,7,14,.12) 65%, rgba(4,7,14,.6) 100%);
   }
+
+  /* ---- A4RON.AI live chat panel ---- */
+  .a4-log { max-height: 200px; overflow-y: auto; margin-top: 1rem; font-family: "JetBrains Mono", monospace; font-size: 12px; line-height: 1.65; scrollbar-width: thin; scrollbar-color: rgba(59,130,246,.4) transparent; }
+  .a4-log:empty { display: none; }
+  .a4-log > div { margin-bottom: 6px; white-space: pre-wrap; word-break: break-word; }
+  .a4-log .u { color: #93c5fd; }
+  .a4-log .a { color: #94a3b8; }
+  .a4-log .sys { color: #fbbf24; }
+  .a4-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .a4-chip { font-family: "JetBrains Mono", monospace; font-size: 10px; letter-spacing: .15em; color: #60a5fa; background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.3); border-radius: 4px; padding: 5px 10px; cursor: pointer; transition: background .2s, color .2s; }
+  .a4-chip:hover { background: rgba(59,130,246,.22); color: #fff; }
+  .a4-inputrow { display: flex; align-items: center; gap: 8px; margin-top: 12px; border: 1px solid rgba(59,130,246,.4); border-radius: 6px; padding: 9px 12px; background: rgba(6,13,27,.6); }
+  .a4-inputrow:focus-within { border-color: rgba(96,165,250,.85); box-shadow: 0 0 12px rgba(59,130,246,.25); }
+  .a4-prompt { color: #34d399; font-family: monospace; font-weight: 700; }
+  .a4-input { flex: 1; min-width: 0; background: transparent; border: 0; outline: 0; color: #e2e8f0; font-family: "JetBrains Mono", monospace; font-size: 13px; letter-spacing: .04em; }
+  .a4-input::placeholder { color: #475569; }
+  .a4-speak { color: #64748b; transition: color .2s; display: inline-flex; }
+  .a4-speak:hover { color: #60a5fa; }
 </style>
 <!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1MDZZWH85"></script>
@@ -445,21 +463,28 @@ if (META_PIXEL_ID) {
         <!-- voice visualizer (original waveform animation) -->
         <div class="flex items-end gap-[3px] h-12 mt-4" id="eq"></div>
 
-        <div class="mt-5 flex gap-3">
-          <a id="assistant-launch" href="assistant.html"
-            class="glow-btn flex-1 inline-flex items-center justify-center gap-2 border border-blue-500/70 rounded-md px-5 py-3.5 text-[13px] tracking-[0.2em] text-blue-100 hover:text-white transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z"/></svg>
-            INITIALIZE CHAT
-          </a>
-          <a id="assistant-voice" href="assistant.html" aria-label="Speak to the assistant"
-            class="glow-btn inline-flex items-center justify-center gap-2 border border-blue-500/70 rounded-md px-5 py-3.5 text-[13px] tracking-[0.2em] text-blue-100 hover:text-white transition-all">
+        <!-- conversation console -->
+        <div id="a4-log" class="a4-log" aria-live="polite"></div>
+
+        <!-- quick intents -->
+        <div id="a4-chips" class="a4-chips">
+          <button class="a4-chip" type="button" data-q="What does Aaron build?">PROJECTS</button>
+          <button class="a4-chip" type="button" data-q="How do I hire or contact Aaron?">HIRE ME</button>
+          <button class="a4-chip" type="button" data-q="What is this site?">WHAT IS THIS?</button>
+        </div>
+
+        <!-- terminal input line -->
+        <div class="a4-inputrow">
+          <span class="a4-prompt">&gt;</span>
+          <input id="a4-input" class="a4-input" type="text" placeholder="query the mainframe" autocomplete="off" aria-label="Ask A4RON.AI" />
+          <a id="assistant-voice" href="assistant.html" title="Voice — coming soon" aria-label="Speak to the assistant (coming soon)" class="a4-speak">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6v-1.5m-6 7.5a6 6 0 0 1-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 0 1-3-3V4.5a3 3 0 1 1 6 0v8.25a3 3 0 0 1-3 3Z"/></svg>
-            SPEAK
           </a>
         </div>
 
-        <div class="flex justify-between mt-4 pt-3 border-t border-[#12233f] text-[11px] tracking-[0.15em] text-slate-600">
-          <span>UPTIME</span><span id="uptime" class="text-slate-400">1337:00:00</span>
+        <div class="flex justify-between items-center mt-4 pt-3 border-t border-[#12233f] text-[10px] tracking-[0.15em] text-slate-600">
+          <span>AI · CAN BE WRONG · <a href="contact.html" class="text-blue-400 hover:text-blue-300">REACH THE HUMAN</a></span>
+          <span id="uptime" class="text-slate-500">1337:00:00</span>
         </div>
       </div>
 
@@ -732,9 +757,69 @@ for (let i = 0; i < 24; i++) {
   eq.appendChild(b);
 }
 
-/* ---------- AI assistant: chat/voice currently route to assistant.html.
-   TODO: when the real assistant ships, intercept these links and open the
-   embedded chat/voice UI instead (ids: assistant-launch, assistant-voice). ---------- */
+/* ---------- A4RON.AI: live chat wired to the secure gateway ---------- */
+(function a4ron() {
+  const GATEWAY = 'https://a4ron-gateway-409094372831.us-central1.run.app/chat';
+  const log = document.getElementById('a4-log');
+  const input = document.getElementById('a4-input');
+  const chips = document.getElementById('a4-chips');
+  const sub = document.getElementById('assistant-sub');
+  if (!log || !input) return;
+  const session = 'web-' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+  let busy = false;
+
+  function add(cls, text) {
+    const d = document.createElement('div');
+    d.className = cls;
+    if (text) d.textContent = text;
+    log.appendChild(d);
+    log.scrollTop = log.scrollHeight;
+    return d;
+  }
+  function typewriter(el, text) {
+    return new Promise(function (resolve) {
+      let i = 0;
+      (function tick() {
+        el.textContent = text.slice(0, i);
+        log.scrollTop = log.scrollHeight;
+        if (i++ < text.length) setTimeout(tick, 10); else resolve();
+      })();
+    });
+  }
+  async function send(msg) {
+    msg = (msg || '').trim();
+    if (busy || !msg) return;
+    busy = true;
+    input.value = '';
+    add('u', '> ' + msg);
+    if (sub) sub.textContent = 'PROCESSING\u2026';
+    const pending = add('a', '\u2026');
+    try {
+      const r = await fetch(GATEWAY, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: session, message: msg })
+      });
+      if (r.status === 429) { pending.className = 'sys'; pending.textContent = 'RATE LIMIT ENGAGED \u00b7 TRY AGAIN SHORTLY'; }
+      else if (!r.ok) { pending.className = 'sys'; pending.textContent = 'MAINFRAME UNREACHABLE \u00b7 reach Aaron: /contact'; }
+      else {
+        const data = await r.json();
+        pending.textContent = '';
+        await typewriter(pending, data.text || 'MAINFRAME UNREACHABLE \u00b7 reach Aaron: /contact');
+      }
+    } catch (e) {
+      pending.className = 'sys';
+      pending.textContent = 'MAINFRAME UNREACHABLE \u00b7 reach Aaron: /contact';
+    }
+    if (sub) sub.textContent = 'AWAITING INPUT';
+    busy = false;
+  }
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter') send(input.value); });
+  if (chips) chips.addEventListener('click', function (e) {
+    const b = e.target.closest('.a4-chip');
+    if (b) send(b.getAttribute('data-q'));
+  });
+})();
 
 /* ---------- uptime ---------- */
 const bootHours = 1337, bootTime = Date.now();
